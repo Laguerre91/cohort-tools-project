@@ -36,11 +36,13 @@ app.get("/docs", (req, res) => {
 });
 
 app.get('/api/cohorts', (req, res) => {
-  res.sendFile(`${__dirname}/cohorts.json`)
+  const projectsData = require('./data/projects.json')
+  res.json(projectsData)
 })
 
 app.get('/api/students', (req, res) => {
-  res.sendFile(`${__dirname}/students.json`)
+  const studentsData = require('./data/students.json')
+  res.json(studentsData)
 })
 
 // START SERVER
