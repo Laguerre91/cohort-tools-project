@@ -24,11 +24,11 @@ const studentSchema = new Schema({
     },
     languages: {
         type: [String],
-        enum: ['english', 'spanish', 'french', 'german', 'portuguese', 'dutch', 'other']
+        enum: ["English", "Spanish", "French", "German", "Portuguese", "Dutch", "Other"]
     },
     program: {
         type: String,
-        enum: ['Web dev', 'UX/UI', 'Data Analystics', 'Cybersecurity']
+        enum: ["Web Dev", "UX/UI", "Data Analytics", "Cybersecurity"]
     },
     background: {
         type: String,
