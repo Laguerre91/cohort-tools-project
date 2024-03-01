@@ -32,7 +32,7 @@ router.get('/cohort/:id', (req, res, next) => {
         .findById(cohortId)
         .populate('cohort')
         .then((students) => { res.status(200).json(students) })
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 
