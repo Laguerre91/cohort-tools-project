@@ -10,7 +10,7 @@ router.post('/', (req, res, next) => {
     Cohort
         .create({ cohortSlug, cohortName, program, format, campus, startDate, endDate, inProgress, programManager, leadTeacher, totalHours })
         .then(createdCohorts => res.status(201).json(createdCohorts))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 router.get('/', (req, res, next) => {
@@ -19,9 +19,7 @@ router.get('/', (req, res, next) => {
         .then((cohorts) => {
             res.json(cohorts)
         })
-        .catch((err) => {
-            res.status(500).json({ err: "failed" })
-        })
+        .catch((err) => next(err))
 })
 
 
@@ -36,7 +34,7 @@ router.get('/:id', (req, res, next) => {
 
         .findById(cohortId)
         .then(cohortInfo => res.json(cohortInfo))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 router.put('/:id', (req, res, next) => {
@@ -53,7 +51,7 @@ router.put('/:id', (req, res, next) => {
             { new: true, runValidators: true }
         )
         .then(updatedCohort => res.json(updatedCohort))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 
 })
 
@@ -66,7 +64,7 @@ router.delete('/:id', (req, res, next) => {
 
         .findByIdAndDelete(cohortId)
         .then(() => res.sendStatus(202))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 module.exports = router

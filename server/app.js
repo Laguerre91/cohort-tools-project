@@ -40,14 +40,16 @@ const Cohort = require("./models/Cohort.model")
 // ...
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
-});
+})
 
 
 const cohortRoutes = require('./routes/cohort.routes')
 app.use('/api/cohorts', cohortRoutes)
 
-const studentRoutes = require('./routes/student.routes')
+const studentRoutes = require('./routes/student.routes');
 app.use('/api/students', studentRoutes)
+
+require('./error-handling')(app)
 
 // START SERVER
 app.listen(PORT, () => {

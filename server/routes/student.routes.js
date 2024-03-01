@@ -12,7 +12,7 @@ router.post('/', (req, res, next) => {
     Student
         .create({ firstName, lastName, email, phone, linkedinUrl, languages, program, background, image, cohort, projects })
         .then(createdStudent => res.status(201).json(createdStudent))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 
@@ -21,9 +21,7 @@ router.get('/', (req, res, next) => {
         .find()
         .populate('cohort')
         .then((allStudents) => { res.status(201).json(allStudents) })
-        .catch((err) => {
-            res.status(500).json({ err: "failed" })
-        })
+        .catch((err) => next(err))
 })
 
 router.get('/cohort/:id', (req, res, next) => {
@@ -36,6 +34,7 @@ router.get('/cohort/:id', (req, res, next) => {
         .then((students) => { res.status(200).json(students) })
         .catch(err => res.status(500).json(err))
 })
+
 
 router.get('/:id', (req, res, next) => {
 
@@ -70,7 +69,7 @@ router.delete('/:id', (req, res, next) => {
     Student
         .findByIdAndDelete(studentId)
         .then(() => res.sendStatus(202))
-        .catch(err => res.status(500).json(err))
+        .catch(err => next(err))
 })
 
 module.exports = router
