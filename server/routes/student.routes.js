@@ -28,14 +28,13 @@ router.get('/', (req, res, next) => {
 
 router.get('/cohort/:id', (req, res, next) => {
 
-    const { id: studentId } = req.params
+    const { id: cohortId } = req.params
 
     Student
-        .findById(studentId)
+        .findById(cohortId)
         .populate('cohort')
         .then((students) => { res.status(200).json(students) })
         .catch(err => res.status(500).json(err))
-
 })
 
 router.get('/:id', (req, res, next) => {
@@ -47,13 +46,11 @@ router.get('/:id', (req, res, next) => {
         .populate('cohort')
         .then(studentInfo => res.json(studentInfo))
         .catch(err => res.status(500).json(err))
-
 })
 
 router.put('/:id', (req, res, next) => {
 
     const { id: studentId } = req.params
-
     const { firstName, lastName, email, phone, linkedinUrl, languages, program, background, image, cohort, projects } = req.body
 
     Student
@@ -64,7 +61,6 @@ router.put('/:id', (req, res, next) => {
         )
         .then(updatedStudent => res.json(updatedStudent))
         .catch(err => res.status(500).json(err))
-
 })
 
 router.delete('/:id', (req, res, next) => {
